@@ -1,12 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"  %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <title>Spring Boot</title>
-    </head>
-    <body>
-        <h1>Olá Spring!!!</h1>
-    </body>
+<html>
+<head>
+    <title>Início</title>
+</head>
+<body>
+    <h1>Sistema de Gêneros</h1>
+    <a href="/list">Ver Lista</a>
+</body>
 </html>

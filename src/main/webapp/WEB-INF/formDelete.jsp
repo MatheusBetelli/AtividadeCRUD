@@ -1,18 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"  %>
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <title>Remover Tarefa</title>
-    </head>
-    <body>
-        <h1>Remover Tarefa</h1>
-        <p>Tem certeza que deseja remover a tarefa ${tarefa.descricao} ?</p>
-        <form action="/tarefas/delete" method="post">
-            <input type="hidden" name="id" value="${tarefa.id}" />    
-            <button type="submit">Remover</button>
-        </form>
-    </body>
+<html>
+<head>
+    <title>Excluir Gênero</title>
+</head>
+<body>
+    <h1>Excluir Gênero</h1>
+    <p>Tem certeza que deseja excluir "${genero.nome}"?</p>
+    <form action="/delete" method="post">
+        <input type="hidden" name="id" value="${genero.id}">
+        <button type="submit">Confirmar</button>
+    </form>
+    <a href="/list">Cancelar</a>
+</body>
 </html>
