@@ -10,8 +10,10 @@ public class Genero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String descricao;
+    private String nome;      
+    private String descricao; 
+    
+    
 
     public Long getId() {
         return id;
