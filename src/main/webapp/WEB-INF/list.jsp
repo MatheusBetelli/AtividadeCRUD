@@ -12,7 +12,7 @@
         
         <a href="/genero/insert">Novo Gênero</a>
         
-        <table border="1">
+        <table >
             <thead>
                 <tr>
                     <th>ID</th>
