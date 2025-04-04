@@ -1,69 +1,79 @@
 package application.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import application.model.Genero;
 import application.repository.GeneroRepository;
 
 @Controller
+@RequestMapping(value = {"/genero", "/"})
 public class GeneroController {
-
     @Autowired
     private GeneroRepository generoRepo;
 
-    @GetMapping("/")
-    public String index() {
-        return "redirect:/list";
-    }
-
-    @GetMapping("/list")
-    public String list(Model model) {
-        model.addAttribute("generos", generoRepo.findAll());
+    @RequestMapping(value = {"/list", ""})
+    public String select(Model ui) {
+        ui.addAttribute("generos", generoRepo.findAll());
         return "list";
     }
 
-    @GetMapping("/insert")
+    @RequestMapping("/insert")
     public String insert() {
         return "formInsert";
     }
 
-    @PostMapping("/insert")
-    public String insert(@RequestParam String nome, @RequestParam String descricao) {
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public String insert(@RequestParam("nome") String nome){
         Genero genero = new Genero();
         genero.setNome(nome);
-        genero.setDescricao(descricao);
+
         generoRepo.save(genero);
-        return "redirect:/list";
+        return "redirect:/genero/list";
     }
 
-    @GetMapping("/update")
-    public String update(@RequestParam Long id, Model model) {
-        model.addAttribute("genero", generoRepo.findById(id).orElseThrow());
-        return "formUpdate";
+    @RequestMapping("/update")
+    public String update(@RequestParam("id") long id, Model ui) {
+        Optional<Genero> resultado = generoRepo.findById(id);
+        if (resultado.isPresent()){
+            ui.addAttribute("genero", resultado.get());
+            return "formUpdate";
+        }
+        return "redirect:/genero/list";
     }
 
-    @PostMapping("/update")
-    public String update(@RequestParam Long id, @RequestParam String nome, @RequestParam String descricao) {
-        Genero genero = generoRepo.findById(id).orElseThrow();
-        genero.setNome(nome);
-        genero.setDescricao(descricao);
-        generoRepo.save(genero);
-        return "redirect:/list";
+    @RequestMapping(value = "/update", method=RequestMethod.POST)
+    public String update(
+        @RequestParam("id") long id,
+        @RequestParam("nome") String nome) {
+            Optional<Genero> resultado = generoRepo.findById(id);
+            if(resultado.isPresent()) {
+                Genero genero = resultado.get();
+                genero.setNome(nome);
+                generoRepo.save(genero);
+            }
+            return "redirect:/genero/list";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam Long id, Model model) {
-        model.addAttribute("genero", generoRepo.findById(id).orElseThrow());
-        return "formDelete";
+    @RequestMapping("/delete")
+    public String delete(@RequestParam("id") long id, Model ui) {
+        Optional<Genero> resultado = generoRepo.findById(id);
+        if (resultado.isPresent()) {
+            ui.addAttribute("genero", resultado.get());
+            return "formDelete";
+        }
+        return "redirect:/genero/list";
     }
 
-    @PostMapping("/delete")
-    public String delete(@RequestParam Long id) {
+    @RequestMapping(value = "/delete", method=RequestMethod.POST)
+    public String delete(@RequestParam("id") long id) {
         generoRepo.deleteById(id);
-        return "redirect:/list";
+        return "redirect:/genero/list";
     }
 }

@@ -1,16 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Excluir Gênero</title>
-</head>
-<body>
-    <h1>Excluir Gênero</h1>
-    <p>Tem certeza que deseja excluir "${genero.nome}"?</p>
-    <form action="/delete" method="post">
-        <input type="hidden" name="id" value="${genero.id}">
-        <button type="submit">Confirmar</button>
-    </form>
-    <a href="/list">Cancelar</a>
-</body>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Remover Gênero</title>
+    </head>
+    <body>
+        <h1>Remover Gênero</h1>
+        <p>Tem certeza que quer remover o gênero <strong>${genero.nome}</strong>?</p>
+
+        <form action="/genero/delete" method="post">
+            <input type="hidden" name="id" value="${genero.id}" />
+            <button type="submit">Deletar</button>
+        </form>
+    </body>
 </html>

@@ -1,36 +1,33 @@
 package application.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 
 @Entity
-public class Genero {
+@Table(name = "Genero")
+public class Genero{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;      
-    private String descricao; 
-    
-    
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
+    private String nome;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
+    public void setId(long id){
         this.id = id;
     }
-    public String getNome() {
-        return nome;
+
+    public long getId(){
+        return this.id;
     }
-    public void setNome(String nome) {
+
+    public void setNome(String nome){
         this.nome = nome;
     }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+
+    public String getNome(){
+        return this.nome;
     }
 }
